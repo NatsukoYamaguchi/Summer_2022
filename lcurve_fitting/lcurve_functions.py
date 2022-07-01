@@ -212,7 +212,7 @@ def create_param_file(
         
 def run_lroche(time1 = 59619.75221737, 
                time2 = 59619.87119743, 
-               ntime = 5000,
+               ntime = 800,
                expose = 0,
                param_file_loc = param_file_dir, save_loc = dat_file_dir):
     

@@ -37,7 +37,7 @@ def log_likelihood(theta, x, y, yerr):
     sigma2 = yerr**2 
     return -0.5 * np.sum((y - model_y)**2 / sigma2 + np.log(sigma2)) # ln of eqn (9) in Hogg et al. 
 
-bnds = ((60, 90), (8000, 30000), (0.2, 0.5), (2000, 10000),  (2000, 10000), (50000, 60000)) # bounds on each parameter
+bnds = ((60, 90), (8000, 30000), (0.2, 0.5), (2000, 10000),  (2000, 10000), (56489.37, 56489.39)) # bounds on each parameter
 initial = np.array([80, 10000, 0.3, 3000, 4000, 56489.38307139]) # initial conditions
 nll = lambda *args: -log_likelihood(*args) 
 
