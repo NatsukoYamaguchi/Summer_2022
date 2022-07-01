@@ -6,7 +6,7 @@ Created on Thu Jun 23 12:15:41 2022
 @author: natsukoyamaguchi
 
 Get time information from the comments of the lris files 
-+ normalize the spectra (either by polynomial or rolling median fit the the continuum)
++ normalize the spectra (either by polynomial or rolling median fit to the continuum)
 
 """
 from base_settings import *
