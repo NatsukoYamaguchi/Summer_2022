@@ -4,6 +4,9 @@
 Created on Wed Jun 29 09:10:29 2022
 
 @author: natsukoyamaguchi
+
+Finds best fit parameters of lcurve to model the observed light curve using the maximum likelihood method.
+
 """
 from lcurve_functions import lcurve
 import pandas as pd

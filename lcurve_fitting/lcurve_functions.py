@@ -4,6 +4,10 @@
 Created on Mon Jun 27 10:40:15 2022
 
 @author: natsukoyamaguchi
+
+Functions used to run lroche and return output data.
+These are used in the lcurve_ml as the model in the likelihood function. 
+
 """
 
 import pexpect
