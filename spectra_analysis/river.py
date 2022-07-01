@@ -4,6 +4,9 @@
 Created on Thu Jun 16 18:44:46 2022
 
 @author: natsukoyamaguchi
+
+Get river plot of the spectra  
+
 """
 from base_settings import *
 
