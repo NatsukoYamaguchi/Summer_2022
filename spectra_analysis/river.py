@@ -16,15 +16,15 @@ from base_settings import *
 # r: 5500 - 7000 (H alpha: 6500 - 6600, Na: 5850 - 5950)
 # b: 4000 - 5500
 if col == 'r':
-    lo = 5500 
-    hi = 7000
+    lo = 5850 
+    hi = 5950
 elif col == 'b':
     lo = 4000 
     hi = 5500
     
 # vmin and vmax (imshow data range)
-vmin= 0.2 # 0.5
-vmax= 1.3 # 1.5
+vmin= 0.3 # 0.5
+vmax= 1.2 # 1.5
 
 #%% Get the lris spectrum 
 
@@ -84,6 +84,8 @@ for n in range(len(dat)):
     flux_min.append(np.min(f(grid)))
     flux_max.append(np.max(f(grid)))
 
+print(np.min(flux_min))
+print(np.max(flux_max))
 #%% River plot using imshow
 
 # Plot multiple periods 
@@ -96,6 +98,6 @@ plt.xlabel('Wavelength', fontsize = 9)
 plt.ylabel('Orbital Phase', fontsize = 9)
 plt.title(title)
 if norm == 'poly':
-    plt.savefig(base_directory + '/plots/' + 'river' + '_' + col + '_' + norm + '_' + str(lo) + '_' + str(hi) + '.png')
+    plt.savefig(base_directory + '/plots/' + 'river' + '_' + col + '_' + norm + '_' + str(lo) + '_' + str(hi) + '.png', dpi = 300)
 if norm == 'rolling':
-    plt.savefig(base_directory + '/plots/' + 'river' + '_' + col + '_' + norm + '_' + str(window) + '_' + str(lo) + '_' + str(hi) + '.png')
+    plt.savefig(base_directory + '/plots/' + 'river' + '_' + col + '_' + norm + '_' + str(window) + '_' + str(lo) + '_' + str(hi) + '.png', dpi = 300)

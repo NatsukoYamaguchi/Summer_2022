@@ -84,15 +84,15 @@ z = convolve(y, g)
 # plt.legend(loc='best')
 # plt.show()
 
-temp_spectrum_inst = pd.DataFrame(data = {'wavelength': np.log(x), 'flux': z})
+temp_spectrum_inst = pd.DataFrame(data = {'log_wavelength': np.log(x), 'flux': z})
 
 ## Rotational Broadening ##
 
 from PyAstronomy import pyasl
 
-rflux = pyasl.rotBroad(np.exp(temp_spectrum_inst['wavelength']).to_numpy(), temp_spectrum_inst['flux'].to_numpy(), epsilon = eps, vsini = rv)
+rflux = pyasl.rotBroad(np.exp(temp_spectrum_inst['log_wavelength']).to_numpy(), temp_spectrum_inst['flux'].to_numpy(), epsilon = eps, vsini = rv)
 
-temp_spectrum_inst_rot = pd.DataFrame(data = {'wavelength': np.log(x), 'flux': rflux})
+temp_spectrum_inst_rot = pd.DataFrame(data = {'log_wavelength': np.log(x), 'flux': rflux})
 
 if norm == 'poly':
     temp_spectrum_inst_rot.to_csv(base_directory + '/outputs' + '/temp_inst_rot_' + norm + '_' + col + '.csv', index = False)

@@ -6,7 +6,7 @@ Created on Thu Jun 23 12:15:41 2022
 @author: natsukoyamaguchi
 
 Get time information from the comments of the lris files 
-+ normalize the spectra (either by polynomial or rolling median fit to the continuum)
++ normalize the spectra (either by polynomial or rolling median fit the the continuum)
 
 """
 from base_settings import *
@@ -96,8 +96,8 @@ elif norm == 'rolling':
         fine_grid = np.arange(np.min(x), np.max(x), 0.14) # interpolate to finer grid ~ same as template 
         interp_func = interp1d(x, y) 
         interp_func_2 = interp1d(x, y_2)
-        rolling = pd.Series(interp_func(fine_grid)).rolling(window, min_periods = 1).median()
-        rolling_2 = pd.Series(interp_func_2(fine_grid)).rolling(window, min_periods = 1).median()
+        rolling = pd.Series(interp_func(fine_grid)).rolling(window, min_periods = 1, center = True).median()
+        rolling_2 = pd.Series(interp_func_2(fine_grid)).rolling(window, min_periods = 1, center = True).median()
         interp_func_back = interp1d(fine_grid, rolling, fill_value="extrapolate")
         interp_func_back_2 = interp1d(fine_grid, rolling_2, fill_value="extrapolate")
         cont = y/interp_func_back(x)

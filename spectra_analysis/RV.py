@@ -75,7 +75,7 @@ if broadening == 'no':
     flux_norm_temp = y_temp_slice/polyfit_norm
      
     # *log* of wavelength (the dopper shift is constant on log scale for the CCF)
-    temp_spectrum = pd.DataFrame(data = {'wavelength': np.log(x_temp_slice), 'flux': flux_norm_temp})
+    temp_spectrum = pd.DataFrame(data = {'log_wavelength': np.log(x_temp_slice), 'flux': flux_norm_temp})
     tag = 'no_inst_rot'
 
 elif broadening == 'yes': 
@@ -114,23 +114,23 @@ for n in range(len(dat)):
     y_dat = y_dat_n[(x_dat_n >= x_lolim + 200) & (x_dat_n <= x_uplim - 200)]
     
     # *log* of wavelength (the dopper shift is constant on log scale for the CCF)
-    dat_spectrum = pd.DataFrame(data = {'wavelength': np.log(x_dat), 'flux': y_dat})
+    dat_spectrum = pd.DataFrame(data = {'log_wavelength': np.log(x_dat), 'flux': y_dat})
     
     CCF_arr = np.zeros(len(shift))
     
     for i in range(len(shift)):
     
-        temp_shifted = pd.DataFrame(data = {'wavelength': temp_spectrum['wavelength'] + shift[i], 'flux': temp_spectrum['flux']})
+        temp_shifted = pd.DataFrame(data = {'wavelength': temp_spectrum['log_wavelength'] + shift[i], 'flux': temp_spectrum['flux']})
         interp_func = interp1d(temp_shifted['wavelength'], temp_shifted['flux'])
         
-        temp_flux = interp_func(dat_spectrum['wavelength'])
+        temp_flux = interp_func(dat_spectrum['log_wavelength'])
         
         CCF_arr[i] = CCF(dat_spectrum['flux'], temp_flux)
     
     def func(x):
         
-        interp_func = interp1d(temp_spectrum['wavelength'] + x, temp_spectrum['flux'])
-        return 1/CCF(dat_spectrum['flux'], interp_func(dat_spectrum['wavelength']))
+        interp_func = interp1d(temp_spectrum['log_wavelength'] + x, temp_spectrum['flux'])
+        return 1/CCF(dat_spectrum['flux'], interp_func(dat_spectrum['log_wavelength']))
     
     # use the shift that maximized CCF from the range we tried as an initial guess to find the precise shift 
     res = optimize.minimize(func, x0 = shift[np.argmax(CCF_arr)], method='nelder-mead')
