@@ -19,7 +19,7 @@ from pathlib import Path
 folder_dir = '/Users/natsukoyamaguchi/Desktop/Summer_2022/lris_p274_analysis/lcurve_fitting'
 Path(folder_dir + '/' + 'ml_fitting').mkdir(parents=True, exist_ok=True)
 
-file_name = 'NM_1'
+file_name = 'NM_5'
 
 observed = pd.read_csv(folder_dir +'/observed/new_data.csv')
 
@@ -37,8 +37,9 @@ def log_likelihood(theta, x, y, yerr):
     sigma2 = yerr**2 
     return -0.5 * np.sum((y - model_y)**2 / sigma2 + np.log(sigma2)) # ln of eqn (9) in Hogg et al. 
 
-bnds = ((60, 90), (8000, 30000), (0.2, 0.5), (2000, 10000),  (2000, 10000), (56489.37, 56489.39)) # bounds on each parameter
-initial = np.array([80, 10000, 0.3, 3000, 4000, 56489.38307139]) # initial conditions
+bnds = ((60, 90), (8000, 30000), (0.2, 0.5), (2000, 10000),  (2000, 10000), (56489.31, 56489.33)) # bounds on each parameter
+initial = np.array([75, 10000, 0.25, 3000, 3000, 56489.326]) # initial conditions
+# initial = np.array([70, 9000, 0.35, 2500, 3500, 56489.326]) # initial conditions
 nll = lambda *args: -log_likelihood(*args) 
 
 # minimize the negative of the log likelihood func (maximize the log likelihood)

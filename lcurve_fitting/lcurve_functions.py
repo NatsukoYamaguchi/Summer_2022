@@ -25,7 +25,7 @@ def create_param_file(
         save_loc = param_file_dir,
         q=0.2096774194,
         iangle=79.76,
-        r1=0.005,
+        r1=0.01, # Kepler's 3rd law, using M_WD = 0.62 M_sun, M_protoWD = 0.13 M_sun, R ~ 0.01 M_sun -> a ~ 0.9 R_sun
         r2=-1,
         cphi3=0.015,
         cphi4=0.017,
@@ -45,7 +45,7 @@ def create_param_file(
         beam_factor1=1.31312039536,
         beam_factor2=1.31312039536,
         deltat=0,
-        t0=56489.38307139,  #56489.326 + P/2 (Birth of the ELMs paper has phases off by 0.5)
+        t0=56489.326,  #56489.326 + P/2 (Birth of the ELMs paper has phases off by 0.5)
         period=0.11414278,
         gravity_dark1=0.5,
         gravity_dark2=0.7501, # r: 0.5424, g: 0.7501
