@@ -24,8 +24,8 @@ dat_file_dir = folder_dir + '/' + 'lroche_files' + '/dat'
 def create_param_file(
         save_loc = param_file_dir,
         q=0.2096774194,
-        iangle=79.76,
-        r1=0.01, # Kepler's 3rd law, using M_WD = 0.62 M_sun, M_protoWD = 0.13 M_sun, R ~ 0.01 M_sun -> a ~ 0.9 R_sun
+        iangle=83, #79.76
+        r1=0.011, # Kepler's 3rd law, using M_WD = 0.62 M_sun, M_protoWD = 0.13 M_sun, R ~ 0.01 M_sun -> a ~ 0.9 R_sun
         r2=-1,
         cphi3=0.015,
         cphi4=0.017,
@@ -45,7 +45,7 @@ def create_param_file(
         beam_factor1=1.31312039536,
         beam_factor2=1.31312039536,
         deltat=0,
-        t0=56489.326,  #56489.326 + P/2 (Birth of the ELMs paper has phases off by 0.5)
+        t0=56489.319,  #56489.326 + P/2 (Birth of the ELMs paper has phases off by 0.5)
         period=0.11414278,
         gravity_dark1=0.5,
         gravity_dark2=0.7501, # r: 0.5424, g: 0.7501
@@ -55,11 +55,11 @@ def create_param_file(
         quad=0,
         rdisc1=-1,
         rdisc2=0.3,
-        height_disc=0.2,
+        height_disc=0.1,
         beta_disc=1.5,
         temp_disc=3200,
         texp_disc=-1.8,
-        temp_edge=4000,
+        temp_edge=0,
         absorb_edge=1,
         lin_limb_disc=0.3,
         quad_limb_disc=0,
@@ -73,11 +73,11 @@ def create_param_file(
         temp_spot=15000,
         tilt_spot=90,
         cfrac_spot=0.20000000000000001,
-        delta_phase=3e-08,
-        nlat1f=50,
-        nlat2f=210,
-        nlat1c=50,
-        nlat2c=170,
+        delta_phase=1e-03,
+        nlat1f=100,
+        nlat2f=100,
+        nlat1c=100,
+        nlat2c=100,
         npole=1,
         nlatfill=3,
         nlngfill=2,
@@ -86,7 +86,7 @@ def create_param_file(
         lhi=-50,
         phase1=0.018,
         phase2=0.482,
-        wavelength=600,
+        wavelength=470, # r: ~ 620 g: ~ 470
         roche1=0,
         roche2=1,
         eclipse1=1,
@@ -210,8 +210,8 @@ def create_param_file(
         f.write('nspot                = ' + str(nspot) + '\n')
         f.write('iscale               = ' + str(iscale) + '')		
         
-def run_lroche(time1 = 59619.75221737, 
-               time2 = 59619.87119743, 
+def run_lroche(time1 = 59619.75, 
+               time2 = 59619.87, 
                ntime = 800,
                expose = 0,
                param_file_loc = param_file_dir, save_loc = dat_file_dir):
