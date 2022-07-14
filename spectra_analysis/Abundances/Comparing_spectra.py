@@ -7,7 +7,7 @@ Created on Sun Jul  3 13:33:10 2022
 """
 from Which_spectra import *
 
-# folder_dir = '/Users/natsukoyamaguchi/Desktop/Summer_2022/lris_p274_analysis/spectra_analysis/Abundances'
+folder_dir = '/Users/natsukoyamaguchi/Desktop/Summer_2022/lris_p274_analysis/spectra_analysis/Abundances'
 save_dir = '/Users/natsukoyamaguchi/Desktop/Summer_2022/lris_p274_analysis/spectra_analysis/Abundances' + '/plots' + '/' + norm + '/' + str(window) +  '/' + col
 Path(save_dir).mkdir(parents=True, exist_ok=True)
 
@@ -54,7 +54,7 @@ else:
     plt.savefig(save_dir + '/' + element + '.png', dpi=300)
 
 
-#%% Comparison to data 
+#%% Comparison of Na absorption line to data 
    
 from Which_spectra import *
     
@@ -114,6 +114,3 @@ plt.xlim(5825, 5950)
 # plt.xlim(8175, 8210)
 # plt.ylim(0.6, 1.2)
 plt.savefig(save_dir + '/Na_5900.png', dpi = 300, bbox_inches = "tight")
-
-
-
