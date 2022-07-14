@@ -4,6 +4,9 @@
 Created on Sat Jul  9 09:06:00 2022
 
 @author: natsukoyamaguchi
+
+Sums the WD and donor models, makes several plots. 
+
 """
 import numpy as np
 import pandas as pd
