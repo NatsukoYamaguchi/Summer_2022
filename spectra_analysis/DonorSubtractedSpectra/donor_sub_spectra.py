@@ -58,7 +58,7 @@ b_times = pd.read_csv('/Users/natsukoyamaguchi/Desktop/Summer_2022/lris_p274_ana
 r_shifts = pd.read_csv('/Users/natsukoyamaguchi/Desktop/Summer_2022/lris_p274_analysis/spectra_analysis/outputs/shift_r.csv')
 b_shifts = pd.read_csv('/Users/natsukoyamaguchi/Desktop/Summer_2022/lris_p274_analysis/spectra_analysis/outputs/shift_b.csv')
 
-# 4. Find spectra in each filter that is closest to eclipse 
+# 4. Find spectra in each filter that is closest to eclipse (phase = 0.5)
 
 idx = np.argwhere(np.abs(0.5-r_times['phase']).to_numpy() ==  np.min(np.abs(0.5-r_times['phase']).to_numpy()))[0][0]
 idx_b = np.argwhere(np.abs(0.5-b_times['phase']).to_numpy() ==  np.min(np.abs(0.5-b_times['phase']).to_numpy()))[0][0]
@@ -79,7 +79,7 @@ for i in range(len(b_times)):
     b_spectra = pd.DataFrame(data = {'wav': dat_b[i][:,0], 'wav_shift': dat_b[i][:,0] * (1 - b_shift), 'flux':dat_b[i][:,1]})
     
     # 3. Find pairs of r and b spectra that match closest in time 
-    # (There is more spectra in b than r so we find a matching r for every b)
+    # (There are more spectra in b than r so we find a matching r for every b)
 
     b_jdmid = b_times['jdmid'][i]
     r_minus_b = np.abs(r_times['jdmid'] - b_jdmid)
@@ -94,10 +94,6 @@ for i in range(len(b_times)):
     donor_flux = donor_interp(r_slice['wav_shift'])
     scaling = np.mean(r_slice['flux']/donor_flux)
     
-    # plt.plot(r_spectra['wav_shift'], r_spectra['flux'], label  = 'out of eclipse')
-    # plt.plot(donor_spectra['wav_shift'], donor_spectra['flux'] * scaling, label  = 'in eclipse')
-    # plt.legend()
-    
     # 5. Subtract the flux from the scaled donor spectrum from the flux of both spectra
     r_donor_sub = pd.DataFrame(data = {'wav': r_spectra['wav'], 'wav_shift': r_spectra['wav_shift'], 
                                        'dnr_sub_flux': r_spectra['flux'] - (donor_interp(r_spectra['wav_shift']) * scaling)})
@@ -105,13 +101,6 @@ for i in range(len(b_times)):
     b_donor_sub = pd.DataFrame(data = {'wav': b_spectra['wav'], 'wav_shift': b_spectra['wav_shift'], 
                                        'dnr_sub_flux': b_spectra['flux'] - (donor_interp_b(b_spectra['wav_shift']) * scaling)})
     
-    
-    # plt.plot(b_spectra['wav_shift'], b_spectra['flux'])
-    # plt.plot(donor_spectra_b['wav_shift'], donor_spectra_b['flux']* scaling)
-    
     b_donor_sub.to_csv(save_loc + 'b_{0:.5f}'.format(b_jdmid) + '.csv', index = False)
     r_donor_sub.to_csv(save_loc + 'r_{0:.5f}'.format(r_jdmid) + '.csv', index = False)
-    
-    # plt.plot(donor_model['wav'], donor_model['flux'] * scaling)
-
 
